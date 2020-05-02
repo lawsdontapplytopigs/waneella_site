@@ -6,6 +6,8 @@ import Element as E
 
 import Msg
 
+import SampleData
+
 import Url
 import Url.Parser
 
@@ -23,6 +25,7 @@ main = Browser.application
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
+    , posts : List SampleData.Post
     }
 
 init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg.Msg)
@@ -30,6 +33,7 @@ init flags url key =
     (
         { key = key
         , url = url
+        , posts = SampleData.posts
         }
         , Cmd.none
     )
@@ -49,11 +53,13 @@ update msg model =
             ( { model | url = url }
             , Cmd.none
             )
+        Msg.NoOp ->
+            ( model, Cmd.none )
 
 subscriptions model =
     Sub.none
 
-view : Model -> Browser.Document msg
+view : Model -> Browser.Document Msg.Msg
 view model =
     case toRoute model.url of
         Home ->
