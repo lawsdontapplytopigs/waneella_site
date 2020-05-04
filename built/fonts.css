@@ -5,3 +5,20 @@
     font-display: 'swap';
     src: url(../TTCommons/TTCommons-Regular.woff2) format('woff2');
 }
+
+@font-face {
+    font-family: 'TTCommons';
+    font-style: 'normal';
+    font-weight: '500';
+    font-display: 'swap';
+    src: url(../TTCommons/TTCommons-Medium.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'TTCommons';
+    font-style: 'normal';
+    font-weight: '600';
+    font-display: 'swap';
+    src: url(../TTCommons/TTCommons-DemiBold.woff2) format('woff2');
+}
+
