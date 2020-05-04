@@ -9,3 +9,7 @@ type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
     | NoOp
+
+    | SubjectInput String
+    | EmailInput String
+    | MessageInput String

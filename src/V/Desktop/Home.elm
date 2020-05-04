@@ -133,7 +133,7 @@ block0 model =
                         , EBorder.width 4
                         , EBorder.color <| E.rgb255 160 160 160
                         ]
-                        { src = "../../../samples/default_pic.jpg"
+                        { src = "../../../assets/hr_real_size_fixed.gif"
                         , description = "POG"
                         }
                     
@@ -192,12 +192,12 @@ gallery model =
     let
         button = 
             let
-                height = 200
-                width = 56
+                width = 140
+                height = 56
             in
                 EInput.button
-                    [ E.width <| E.px height
-                    , E.height <| E.px width
+                    [ E.width <| E.px width
+                    , E.height <| E.px height
                     -- , EBackground.color <| E.rgb255 60 140 160
                     , EBorder.rounded (round (width / 2))
                     , EBorder.width 2
@@ -214,16 +214,33 @@ gallery model =
                     }
     in
     E.column
-        [ E.height <| E.px 800
+        [ E.height <| E.px 760
         -- , EBackground.color <| E.rgb255 40 60 90
         , E.width E.fill
-        , EBackground.color Palette.color1
+        -- , EBackground.color Palette.color1
+        -- TODO: get some cool pattern and add it here
+        -- , E.htmlAttribute <| Html.Attributes.style "background-repeat" "repeat"
+        -- , E.htmlAttribute <| Html.Attributes.style "background-image" "url(../../../assets/pixel-heart.png)"
+        -- , E.htmlAttribute <| Html.Attributes.style "background-size" "auto"
+        -- , E.htmlAttribute <| Html.Attributes.style "background-blend-mode" "overlay"
+        , EBackground.gradient
+            { angle = 3.14
+            , steps =
+                [ Palette.color0
+                , Palette.color1
+                , Palette.color1
+                , Palette.color1
+                , Palette.color1
+                , Palette.color1
+                , Palette.color0
+                ]
+            }
         ]
         [ E.el
             [ E.height E.fill
             , E.centerX
             , E.centerY
-            , EFont.size 26
+            , EFont.size 22
             , EFont.color <| E.rgb255 255 255 255
             , EFont.family 
                 [ EFont.typeface Palette.font1
@@ -248,8 +265,9 @@ gallery model =
 
 block1 model =
     E.el
-        [ E.height <| E.px 500
+        [ E.height <| E.px 300
         , EBackground.color <| Palette.color2
+        -- , EBackground.color <| E.rgb255 20 20 20
         , E.width E.fill
         ]
         <| E.text ""
@@ -258,7 +276,7 @@ littleExpoPost { title, src } =
     let
         img source =
             E.image
-                [ E.height <| E.px 480
+                [ E.height <| E.px 420 -- haha lol 420 blazeit 8888888)
                 , EBorder.shadow
                     { blur = 18.0
                     , color = E.rgb255 0 0 0
@@ -272,6 +290,7 @@ littleExpoPost { title, src } =
     in
     E.column
         [ E.spacing 10
+        -- , EBackground.color <| E.rgb255 80 80 80
         ]
         [ img src
         , E.el

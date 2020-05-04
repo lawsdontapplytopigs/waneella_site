@@ -33,7 +33,6 @@ navbar model =
                     <| E.text ""
                 , E.link
                     [ EFont.size 14
-                    , EFont.regular
                     , EFont.color <| E.rgb255 255 255 255
                     , EFont.family
                         [ EFont.typeface Palette.font1

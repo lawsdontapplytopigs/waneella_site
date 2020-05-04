@@ -12,6 +12,7 @@ import Url
 import Url.Parser
 
 import V.Desktop.Home
+import V.Desktop.Contact
 
 main = Browser.application
     { init = init
@@ -26,6 +27,13 @@ type alias Model =
     { key : Nav.Key
     , url : Url.Url
     , posts : List SampleData.Post
+    , contactData : ContactData
+    }
+
+type alias ContactData =
+    { subject : Maybe String
+    , email : Maybe String
+    , message : Maybe String
     }
 
 init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg.Msg)
@@ -34,6 +42,11 @@ init flags url key =
         { key = key
         , url = url
         , posts = SampleData.posts
+        , contactData =
+            { subject = Nothing
+            , email = Nothing
+            , message = Nothing
+            }
         }
         , Cmd.none
     )
@@ -45,7 +58,7 @@ update msg model =
             case urlRequest of
                 Browser.Internal url ->
                     ( { model | url = url }
-                    , Cmd.none
+                    , Nav.load (Url.toString url)
                     )
                 Browser.External href ->
                     ( model, Nav.load href )
@@ -56,6 +69,37 @@ update msg model =
         Msg.NoOp ->
             ( model, Cmd.none )
 
+        Msg.SubjectInput str ->
+            ( { model 
+                | contactData =
+                    { subject = Just str
+                    , email = model.contactData.email
+                    , message = model.contactData.message
+                    }
+              }
+            , Cmd.none
+            )
+        Msg.EmailInput str ->
+            ( { model 
+                | contactData =
+                    { subject = model.contactData.subject
+                    , email = Just str
+                    , message = model.contactData.message
+                    }
+              }
+            , Cmd.none
+            )
+        Msg.MessageInput str ->
+            ( { model 
+                | contactData =
+                    { subject = model.contactData.subject
+                    , email = model.contactData.email
+                    , message = Just str
+                    }
+              }
+            , Cmd.none
+            )
+
 subscriptions model =
     Sub.none
 
@@ -64,11 +108,14 @@ view model =
     case toRoute model.url of
         Home ->
             V.Desktop.Home.view "waneella" model
+        Contact ->
+            V.Desktop.Contact.view "waneella - Contact" model
         
 routeParser : Url.Parser.Parser (Route -> a) a
 routeParser =
     Url.Parser.oneOf
         [ Url.Parser.map Home (Url.Parser.s "home")
+        , Url.Parser.map Contact (Url.Parser.s "contact")
         ]
 
 toRoute url =
@@ -76,3 +123,4 @@ toRoute url =
 
 type Route
     = Home
+    | Contact
