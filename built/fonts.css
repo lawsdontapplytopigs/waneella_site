@@ -1,14 +1,6 @@
 @font-face {
     font-family: 'TT Commons';
     font-style: 'normal';
-    font-weight: '400';
-    font-display: 'swap';
-    src: url(TTCommons/TTCommons-Regular.woff2) format('woff2');
-}
-
-@font-face {
-    font-family: 'TT Commons';
-    font-style: 'normal';
     font-weight: '500';
     font-display: 'swap';
     src: url(TTCommons/TTCommons-Medium.woff2) format('woff2');
@@ -20,5 +12,13 @@
     font-weight: '600';
     font-display: 'swap';
     src: url(TTCommons/TTCommons-DemiBold.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    font-style: 'normal';
+    font-weight: '400';
+    font-display: 'swap';
+    src: url(TTCommons/TTCommons-Regular.woff2) format('woff2');
 }
 
