@@ -58,7 +58,8 @@ update msg model =
             case urlRequest of
                 Browser.Internal url ->
                     ( { model | url = url }
-                    , Nav.load (Url.toString url)
+                    -- , Nav.load (Url.toString url)
+                    , Cmd.none -- only for this demo build.. netlify complains otherwise
                     )
                 Browser.External href ->
                     ( model, Nav.load href )
